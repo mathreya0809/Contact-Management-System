@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+  <title>Contacts List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+</head>
+  
+
+<body>
+
+    <style>
+    body {
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/33/Contacts.jpg");
+      background-repeat: no-repeat;
+    }
+    </style>
+
+    <h1>Hi , {{ nameUser.userfirstname }}</h1>
+
+    <div class="row">
+    <div class="container-fluid" style="padding-top: 0%;background-color: lightblue;">
+      <ul class="nav navbar-nav">
+        <div class="navbar-header">
+          <i class='fas fa-user-graduate' style='font-size:50px;color: black;'></i>
+        </div>
+        </ul>
+    </div>
+
+
+    <div class="row" style="padding-top: 10px;">
+
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10" style="background-color: lightgrey;height: 385px;">
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mobile</th>
+              </tr>
+            </thead>
+
+            <tbody>
+             
+              {% for record in contactList %}
+                <tr>
+                <th scope="row">{{ record.0 }}</th>
+                <td>{{ record.2 }}</td>
+                <td>{{ record.3 }}</td>
+                <td>{{ record.4 }}</td>
+                <td>{{ record.5 }}</td>
+                <td> <a href="login/user?id={{ record.0 }}" target="_blank">share contact</a> </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+          </table>
+
+      </div>
+
+      <div class="col-sm-1"></div>
+    </div>
+
+     <script>
+        $(document).ready(function () {
+            $('#table tr').click(function () {
+                var href = $(this).find("a").attr("href");
+                if (href) { window.open = href; }
+            });
+        });
+     </script>
+
+   
+    <form action='logout' method='POST'>
+     {{ msg }}
+     {% csrf_token %}
+
+        <div class="container">
+            <button type="submit" id="mybutton" class="btn btn-success pull-right"><span class="glyphicon glyphicon-log-out"></span>LOGOUT</button>
+        </div>
+    </form>
+
+</body>
+
+<div class="footer" style="position: fixed;left: 0;bottom: 0;width:100%;background-color: grey;color: white;text-align: center;">
+
+</html>
